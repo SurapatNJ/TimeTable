@@ -1,0 +1,418 @@
+{
+    "swagger" : "2.0",
+    "info" : {
+      "version": "1.2.1",
+          "title": "REST-API Documentation \"โปรแกรมจัดตารางสอน\"",
+          "description": "เอกสารรวบรวมรูปแบบการส่งข้อมูลโปรแกรมจัดตารางสอน",
+          "license": {
+              "name": "SurapatNJ & Suhaimee24",
+              "url": "https://github.com/suhaimee24/web-timetable"
+          }
+    },
+    "paths" : {
+        "/API/{table_name}" : {
+                "get" : {
+                    "tags":["call table"],
+                "produces" : [ "application/json" ],
+                "parameters" : [ { 
+                    "name" : "table",
+                    "in" : "path",
+                    "description" : "List : subject_section,curriculum2_subject,curriculum2_section,teach_table",
+                    "required" : true,
+                    "type" : "string"
+                } ],
+                "responses" : {
+                    "200" : {
+                    "description" : "Definition generated from Swagger Inspector",
+                    "schema" : {
+                        "$ref" : "#/definitions/Model8"
+                    }
+                    }
+                }
+                }
+            },
+        "/API/subject_section/" : {
+            "post" : {
+                "tags":["subject_section"],
+            "consumes" : [ "application/json" ],
+            "produces" : [ "text/html" ],
+            "parameters" : [ {
+                "in" : "body",
+                "name" : "body",
+                "required" : false,
+                "schema" : {
+                "$ref" : "#/definitions/Model4"
+                },
+                "x-examples" : {
+                "application/json" : "{\n    \"subject_id\" : \"01000002\" ,\n    \"subject_section\" : 1 ,\n    \"teach_hr\" : 3 ,\n    \"subject_section_student_amount\" : 40 ,\n    \"teach_day\" : \"tue\",\n    \"teach_time\" : \"13:00:00\" ,\n    \"teach_time2\" : \"16:15:00\",\n    \"lect_or_prac\" : \"l\",\n    \"break_time\" : 15\n}"
+                }
+            } ],
+            "responses" : {
+                "200" : {
+                "description" : "Definition generated from Swagger Inspector",
+                "schema" : {
+                    "type" : "string"
+                }
+                }
+            }
+            },
+            "put" : {
+                "tags":["subject_section"],
+            "consumes" : [ "application/json" ],
+            "produces" : [ "text/html" ],
+            "parameters" : [ {
+                "in" : "body",
+                "name" : "body",
+                "required" : false,
+                "schema" : {
+                "$ref" : "#/definitions/Model5"
+                },
+                "x-examples" : {
+                "application/json" : "{\n    \"subject_id\" : \"01000002\" ,\n    \"subject_section\" : 1 ,\n    \"teach_hr\" : 3 ,\n    \"subject_section_student_amount\" : 40 ,\n    \"teach_day\" : \"mon\",\n    \"teach_time\" : \"13:00:00\" ,\n    \"teach_time2\" : \"16:15:00\",\n    \"lect_or_prac\" : \"l\",\n    \"break_time\" : 15\n}"
+                }
+            } ],
+            "responses" : {
+                "200" : {
+                "description" : "Definition generated from Swagger Inspector",
+                "schema" : {
+                    "type" : "string"
+                }
+                }
+            }
+            },
+            "delete" : {
+                "tags":["subject_section"],
+            "consumes" : [ "application/json" ],
+            "produces" : [ "text/html" ],
+            "parameters" : [ {
+                "in" : "body",
+                "name" : "body",
+                "required" : false,
+                "schema" : {
+                "$ref" : "#/definitions/Model6"
+                },
+                "x-examples" : {
+                "application/json" : "{\r\n    \"subject_id\" : \"01000002\" ,\r\n    \"subject_section\" : 1\r\n}"
+                }
+            } ],
+            "responses" : {
+                "200" : {
+                "description" : "Definition generated from Swagger Inspector",
+                "schema" : {
+                    "type" : "string"
+                }
+                }
+            }
+            }
+        },
+        "/API/curriculum2_subject/" : {
+            "post" : {
+                "tags":["curriculum2_subject"],
+            "consumes" : [ "application/json" ],
+            "produces" : [ "text/html" ],
+            "parameters" : [ {
+                "in" : "body",
+                "name" : "body",
+                "required" : false,
+                "schema" : {
+                "$ref" : "#/definitions/Model1"
+                },
+                "x-examples" : {
+                "application/json" : "{\n        \"curr2_id\": \"06\",\n        \"subject_id\": \"01000002\",\n        \"semester\": 1\n   }"
+                }
+            } ],
+            "responses" : {
+                "200" : {
+                "description" : "Definition generated from Swagger Inspector",
+                "schema" : {
+                    "type" : "string"
+                }
+                }
+            }
+            },
+            "delete" : {
+                "tags":["curriculum2_subject"],
+            "consumes" : [ "application/json" ],
+            "produces" : [ "text/html" ],
+            "parameters" : [ {
+                "in" : "body",
+                "name" : "body",
+                "required" : false,
+                "schema" : {
+                "$ref" : "#/definitions/Model7"
+                },
+                "x-examples" : {
+                "application/json" : "{\n        \"curr2_id\": \"06\",\n        \"subject_id\": \"01000002\",\n        \"semester\": 1\n   }"
+                }
+            } ],
+            "responses" : {
+                "200" : {
+                "description" : "Definition generated from Swagger Inspector",
+                "schema" : {
+                    "type" : "string"
+                }
+                }
+            }
+            }
+        },
+        "/API/curriculum2_section/" : {
+            "post" : {
+                "tags":["curriculum2_section"],
+            "consumes" : [ "application/json" ],
+            "produces" : [ "text/html" ],
+            "parameters" : [ {
+                "in" : "body",
+                "name" : "body",
+                "required" : false,
+                "schema" : {
+                "$ref" : "#/definitions/Model0"
+                },
+                "x-examples" : {
+                "application/json" : "{    \r\n    \"curr2_id\" : \"07\" ,\r\n    \"curr2_section\":1,\r\n    \"curr2_section_student_amount\":1\r\n}"
+                }
+            } ],
+            "responses" : {
+                "200" : {
+                "description" : "Definition generated from Swagger Inspector",
+                "schema" : {
+                    "type" : "string"
+                }
+                }
+            }
+            },
+            "put" : {
+                "tags":["curriculum2_section"],
+            "consumes" : [ "application/json" ],
+            "produces" : [ "text/html" ],
+            "parameters" : [ {
+                "in" : "body",
+                "name" : "body",
+                "required" : false,
+                "schema" : {
+                "$ref" : "#/definitions/Model2"
+                },
+                "x-examples" : {
+                "application/json" : "{    \r\n    \"curr2_id\" : \"07\" ,\r\n    \"curr2_section\":1,\r\n    \"curr2_section_student_amount\":40\r\n}"
+                }
+            } ],
+            "responses" : {
+                "200" : {
+                "description" : "Definition generated from Swagger Inspector",
+                "schema" : {
+                    "type" : "string"
+                }
+                }
+            }
+            },
+            "delete" : {
+                "tags":["curriculum2_section"],
+            "consumes" : [ "application/json" ],
+            "produces" : [ "text/html" ],
+            "parameters" : [ {
+                "in" : "body",
+                "name" : "body",
+                "required" : false,
+                "schema" : {
+                "$ref" : "#/definitions/Model3"
+                },
+                "x-examples" : {
+                "application/json" : "{    \r\n    \"curr2_id\" : \"07\" ,\r\n    \"curr2_section\":1\r\n}"
+                }
+            } ],
+            "responses" : {
+                "200" : {
+                "description" : "Definition generated from Swagger Inspector",
+                "schema" : {
+                    "type" : "string"
+                }
+                }
+            }
+            }
+        }
+      
+    },
+    "definitions" : {
+      "Model0" : {
+        "properties" : {
+          "curr2_id" : {
+            "type" : "string"
+          },
+          "curr2_section" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "curr2_section_student_amount" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "Model1" : {
+        "properties" : {
+          "curr2_id" : {
+            "type" : "string"
+          },
+          "subject_id" : {
+            "type" : "string"
+          },
+          "semester" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "Model2" : {
+        "properties" : {
+          "curr2_id" : {
+            "type" : "string"
+          },
+          "curr2_section" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "curr2_section_student_amount" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "Model3" : {
+        "properties" : {
+          "curr2_id" : {
+            "type" : "string"
+          },
+          "curr2_section" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "Model4" : {
+        "properties" : {
+          "subject_id" : {
+            "type" : "string"
+          },
+          "subject_section" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "teach_hr" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "subject_section_student_amount" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "teach_day" : {
+            "type" : "string"
+          },
+          "teach_time" : {
+            "type" : "string"
+          },
+          "teach_time2" : {
+            "type" : "string"
+          },
+          "lect_or_prac" : {
+            "type" : "string"
+          },
+          "break_time" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "Model5" : {
+        "properties" : {
+          "subject_id" : {
+            "type" : "string"
+          },
+          "subject_section" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "teach_hr" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "subject_section_student_amount" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "teach_day" : {
+            "type" : "string"
+          },
+          "teach_time" : {
+            "type" : "string"
+          },
+          "teach_time2" : {
+            "type" : "string"
+          },
+          "lect_or_prac" : {
+            "type" : "string"
+          },
+          "break_time" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "Model6" : {
+        "properties" : {
+          "subject_id" : {
+            "type" : "string"
+          },
+          "subject_section" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "Model7" : {
+        "properties" : {
+          "curr2_id" : {
+            "type" : "string"
+          },
+          "subject_id" : {
+            "type" : "string"
+          },
+          "semester" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "Model8" : {
+        "type" : "array"
+      },
+      "Array" : {
+        "properties" : {
+          "curr2_id" : {
+            "type" : "string"
+          },
+          "subject_id" : {
+            "type" : "string"
+          },
+          "semester" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "Model11_Array" : {
+        "properties" : {
+          "curr2_id" : {
+            "type" : "string"
+          },
+          "curr2_section" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "curr2_section_student_amount" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      }
+    }
+  }
