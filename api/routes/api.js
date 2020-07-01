@@ -4,14 +4,19 @@ var bodyParser = require('body-parser');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
-
+var options = {
+    swaggerOptions: {
+        defaultModelsExpandDepth: -1
+    },
+    //customCss: '.swagger-ui .topbar { display: none }'
+  };
 //var curriculum2 = require('./curriculum2');
 
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: true }))
 router.use(express.static('public'));
 router.use('/api-docs', swaggerUi.serve);
-router.get('/api-docs', swaggerUi.setup(swaggerDocument));
+router.get('/api-docs', swaggerUi.setup(swaggerDocument,options));
 
 //index
 
@@ -19,7 +24,7 @@ router.get('/', function(req, res, next) {
     res.send('API is working properly');
 });
 
-//curriculum2_section
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////curriculum2_section
 
 var curriculum2_section = require('./curriculum2_section');
 
@@ -69,7 +74,7 @@ router.delete('/curriculum2_section/',(req,res)=> {
      });
 })
 
-//curriculum2_subject
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////curriculum2_subject
 
 var curriculum2_subject = require('./curriculum2_subject');
 
@@ -85,11 +90,11 @@ router.post('/curriculum2_subject/',(req,res)=> {
      });
 })
 
-//CANT UPDATE bc same primary key
-// router.put('/curriculum2_subject/:curr2_id/:subject_id/:semester',(req,res)=> {
-//     console.log(req.params)
-//     console.log(req.body)
-//     curriculum2_section.UPDATE(req.params.curr2_id,req.params.subject_id,req.body.semester,req.body.curr2_id,req.body.subject_id,req.body.semester)
+// //CANT UPDATE bc same primary key
+// router.post('/curriculum2_subject/',(req,res)=> {
+//     curriculum2_subject.UPDATE(req.body.curr2_id,req.body.subject_id,req.body.semester, (err, data) => {
+//         res.send(data);
+//      });
 // })
 
 router.delete('/curriculum2_subject/',(req,res)=> {
@@ -98,7 +103,7 @@ router.delete('/curriculum2_subject/',(req,res)=> {
      });
 })
 
-//subject_section
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////subject_section
 
 var subject_section = require('./subject_section');
 
@@ -127,13 +132,40 @@ router.delete('/subject_section/',(req,res)=> {
 })
 
 
-//teach_table
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////teach_table
 var teach_table = require('./teach_table');
 
 router.get('/teach_table',(req,res)=> {
     teach_table.READ(function(callback){
     res.json(callback);
     });
+})
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////curriculum2
+var curriculum2 = require('./curriculum2');
+
+router.get('/curriculum2',(req,res)=> {
+    curriculum2.READ(function(callback){
+    res.json(callback);
+    });
+})
+
+router.post('/curriculum2/', (req,res)=> {
+    curriculum2.CREATE(req.body.curr2_id,req.body.dept_id,req.body.curr2_tname,req.body.curr2_ename, (err, data) => {
+      res.send(data);
+   });
+  });
+
+router.put('/curriculum2/', (req,res)=> {
+    curriculum2.UPDATE(req.body.curr2_id,req.body.dept_id,req.body.curr2_tname,req.body.curr2_ename, (err, data) => {
+        res.send(data);
+     });
+})
+
+router.delete('/curriculum2/',(req,res)=> {
+    curriculum2.DELETE(req.body.curr2_id, (err, data) => {
+        res.send(data);
+     });
 })
 
 module.exports = router;

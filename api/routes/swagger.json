@@ -1,7 +1,7 @@
 {
     "swagger" : "2.0",
     "info" : {
-      "version": "1.2.1",
+      "version": "2.3.1",
           "title": "REST-API Documentation \"โปรแกรมจัดตารางสอน\"",
           "description": "เอกสารรวบรวมรูปแบบการส่งข้อมูลโปรแกรมจัดตารางสอน",
           "license": {
@@ -15,15 +15,15 @@
                     "tags":["call table"],
                 "produces" : [ "application/json" ],
                 "parameters" : [ { 
-                    "name" : "table",
+                    "name" : "table_name",
                     "in" : "path",
-                    "description" : "List : subject_section,curriculum2_subject,curriculum2_section,teach_table",
+                    "description" : "List : \nsubject_section\ncurriculum2_subject\ncurriculum2_section\nteach_table\ncurriculum2",
                     "required" : true,
                     "type" : "string"
                 } ],
                 "responses" : {
                     "200" : {
-                    "description" : "Definition generated from Swagger Inspector",
+                    "description" : "OK",
                     "schema" : {
                         "$ref" : "#/definitions/Model8"
                     }
@@ -49,7 +49,7 @@
             } ],
             "responses" : {
                 "200" : {
-                "description" : "Definition generated from Swagger Inspector",
+                "description" : "OK",
                 "schema" : {
                     "type" : "string"
                 }
@@ -73,7 +73,7 @@
             } ],
             "responses" : {
                 "200" : {
-                "description" : "Definition generated from Swagger Inspector",
+                "description" : "OK",
                 "schema" : {
                     "type" : "string"
                 }
@@ -97,7 +97,7 @@
             } ],
             "responses" : {
                 "200" : {
-                "description" : "Definition generated from Swagger Inspector",
+                "description" : "OK",
                 "schema" : {
                     "type" : "string"
                 }
@@ -123,7 +123,7 @@
             } ],
             "responses" : {
                 "200" : {
-                "description" : "Definition generated from Swagger Inspector",
+                "description" : "OK",
                 "schema" : {
                     "type" : "string"
                 }
@@ -147,7 +147,7 @@
             } ],
             "responses" : {
                 "200" : {
-                "description" : "Definition generated from Swagger Inspector",
+                "description" : "OK",
                 "schema" : {
                     "type" : "string"
                 }
@@ -173,7 +173,7 @@
             } ],
             "responses" : {
                 "200" : {
-                "description" : "Definition generated from Swagger Inspector",
+                "description" : "OK",
                 "schema" : {
                     "type" : "string"
                 }
@@ -197,7 +197,7 @@
             } ],
             "responses" : {
                 "200" : {
-                "description" : "Definition generated from Swagger Inspector",
+                "description" : "OK",
                 "schema" : {
                     "type" : "string"
                 }
@@ -221,13 +221,87 @@
             } ],
             "responses" : {
                 "200" : {
-                "description" : "Definition generated from Swagger Inspector",
+                "description" : "OK",
                 "schema" : {
                     "type" : "string"
                 }
                 }
             }
             }
+        },
+        "/API/curriculum2" : {
+          "post" : {
+            "tags":["curriculum2"],
+            "consumes" : [ "application/json" ],
+            "produces" : [ "text/html" ],
+            "parameters" : [ {
+              "in" : "body",
+              "name" : "body",
+              "required" : false,
+              "schema" : {
+                "$ref" : "#/definitions/Model12"
+              },
+              "x-examples" : {
+                "application/json" : "{\n        \"curr2_id\": \"63\",\n        \"dept_id\": \"13\",\n        \"curr2_tname\": \"TEST)\",\n        \"curr2_ename\": \"-\"\n    }"
+              }
+            } ],
+            "responses" : {
+              "200" : {
+                "description" : "OK",
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "put" : {
+            "tags":["curriculum2"],
+            "consumes" : [ "application/json" ],
+            "produces" : [ "text/html" ],
+            "parameters" : [ {
+              "in" : "body",
+              "name" : "body",
+              "required" : false,
+              "schema" : {
+                "$ref" : "#/definitions/Model13"
+              },
+              "x-examples" : {
+                "application/json" : "{\n        \"curr2_id\": \"63\",\n        \"dept_id\": \"13\",\n        \"curr2_tname\": \"TEST2\",\n        \"curr2_ename\": \"-\"\n    }"
+              }
+            } ],
+            "responses" : {
+              "200" : {
+                "description" : "OK",
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "delete" : {
+            "tags":["curriculum2"],
+            "consumes" : [ "application/json" ],
+            "produces" : [ "text/html" ],
+            "parameters" : [ {
+              "in" : "body",
+              "name" : "body",
+              "required" : false,
+              "schema" : {
+                "$ref" : "#/definitions/Model14"
+              },
+              "x-examples" : {
+                "application/json" : "{\n        \"curr2_id\": \"63\"\n    }"
+              }
+            } ],
+            "responses" : {
+              "200" : {
+                "description" : "OK",
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
         }
       
     },
@@ -411,6 +485,45 @@
           "curr2_section_student_amount" : {
             "type" : "integer",
             "format" : "int32"
+          }
+        }
+      },
+      "Model12" : {
+        "properties" : {
+          "curr2_id" : {
+            "type" : "string"
+          },
+          "dept_id" : {
+            "type" : "string"
+          },
+          "curr2_tname" : {
+            "type" : "string"
+          },
+          "curr2_ename" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Model13" : {
+        "properties" : {
+          "curr2_id" : {
+            "type" : "string"
+          },
+          "dept_id" : {
+            "type" : "string"
+          },
+          "curr2_tname" : {
+            "type" : "string"
+          },
+          "curr2_ename" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Model14" : {
+        "properties" : {
+          "curr2_id" : {
+            "type" : "string"
           }
         }
       }
