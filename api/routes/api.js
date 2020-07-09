@@ -21,8 +21,8 @@ var options = {
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: true }))
 router.use(express.static('public'));
-router.use('/api-docs', swaggerUi.serve);
-router.get('/api-docs', swaggerUi.setup(swaggerDocument,options));
+router.use('/', swaggerUi.serve);
+router.get('/', swaggerUi.setup(swaggerDocument,options));
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////authentication
 const SECRET = "MY_SECRET_KEY";
@@ -50,11 +50,6 @@ const jwtOptions = {
     res.send(jwt.encode(payload, SECRET));
  })
  
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////index
-
-router.get('/', function(req, res, next) {
-    res.send('API is working properly');
-})
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////curriculum2_section
 

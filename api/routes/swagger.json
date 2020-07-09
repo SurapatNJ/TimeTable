@@ -17,7 +17,7 @@
                 "parameters" : [ { 
                     "name" : "table_name",
                     "in" : "path",
-                    "description" : "List : \nsubject_section\ncurriculum2_subject\ncurriculum2_section\nteach_table\ncurriculum2",
+                    "description" : "List : \nsubject_section\ncurriculum2_subject\ncurriculum2_section\nteach_table\ncurriculum2\nsubject",
                     "required" : true,
                     "type" : "string"
                 } ],
