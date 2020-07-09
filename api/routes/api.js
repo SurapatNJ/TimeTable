@@ -3,6 +3,12 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
+const jwt = require("jwt-simple");
+const passport = require("passport");
+const ExtractJwt = require("passport-jwt").ExtractJwt;
+const JwtStrategy = require("passport-jwt").Strategy;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////swaggerUI
 
 var options = {
     swaggerOptions: {
@@ -18,11 +24,37 @@ router.use(express.static('public'));
 router.use('/api-docs', swaggerUi.serve);
 router.get('/api-docs', swaggerUi.setup(swaggerDocument,options));
 
-//index
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////authentication
+const SECRET = "MY_SECRET_KEY";
+var authentication = require('./authentication.js');
+
+//สร้าง Strategy
+const jwtOptions = {
+    jwtFromRequest: ExtractJwt.fromHeader("authorization"),
+    secretOrKey: SECRET
+ };
+ const jwtAuth = new JwtStrategy(jwtOptions, (payload, done) => {
+    if (payload.sub === "kennaruk") done(null, true);
+    else done(null, false);
+ });
+ //เสียบ Strategy เข้า Passport
+ passport.use(jwtAuth);
+ //ทำ Passport Middleware
+ const requireJWTAuth = passport.authenticate("jwt",{session:false});
+
+ router.post("/login", authentication.loginMiddleware, (req, res) => {
+    const payload = {
+       sub: req.body.username,
+       iat: new Date().getTime()
+    };
+    res.send(jwt.encode(payload, SECRET));
+ })
+ 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////index
 
 router.get('/', function(req, res, next) {
     res.send('API is working properly');
-});
+})
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////curriculum2_section
 
@@ -166,6 +198,16 @@ router.delete('/curriculum2/',(req,res)=> {
     curriculum2.DELETE(req.body.curr2_id, (err, data) => {
         res.send(data);
      });
+})
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////subject
+var subject = require('./subject');
+
+router.get('/subject',(req,res)=> {
+    subject.READ(function(callback){
+    res.json(callback);
+    });
 })
 
 module.exports = router;

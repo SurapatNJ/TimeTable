@@ -10,7 +10,7 @@ class App extends Component{
     
   componentWillMount() {
     this.callAPI();
-  }
+  } 
 
   callAPI(){
       fetch("http://localhost:9000/API/curriculum2_section")
