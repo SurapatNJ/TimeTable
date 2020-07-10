@@ -10,6 +10,32 @@
           }
     },
     "paths" : {
+    "/API/login" : {
+      "post" : {
+        "tags":["authentication"],
+        "consumes" : [ "application/json" ],
+        "produces" : [ "text/html" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Model15"
+          },
+          "x-examples" : {
+            "application/json" : "{\n    \"username\" : \"admin\",\n    \"password\" : \"1234\"\n}"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Definition generated from Swagger Inspector",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    },
         "/API/{table_name}" : {
                 "get" : {
                     "tags":["call table"],
@@ -523,6 +549,16 @@
       "Model14" : {
         "properties" : {
           "curr2_id" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Model15" : {
+        "properties" : {
+          "username" : {
+            "type" : "string"
+          },
+          "password" : {
             "type" : "string"
           }
         }

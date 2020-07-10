@@ -25,21 +25,20 @@ router.use('/', swaggerUi.serve);
 router.get('/', swaggerUi.setup(swaggerDocument,options));
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////authentication
-const SECRET = "MY_SECRET_KEY";
+const SECRET = "surapatnj";
 var authentication = require('./authentication.js');
-
-//สร้าง Strategy
 const jwtOptions = {
-    jwtFromRequest: ExtractJwt.fromHeader("authorization"),
+    jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
     secretOrKey: SECRET
  };
+
  const jwtAuth = new JwtStrategy(jwtOptions, (payload, done) => {
-    if (payload.sub === "kennaruk") done(null, true);
+    if (payload.sub === "admin") done(null, true);
     else done(null, false);
  });
- //เสียบ Strategy เข้า Passport
+
  passport.use(jwtAuth);
- //ทำ Passport Middleware
+
  const requireJWTAuth = passport.authenticate("jwt",{session:false});
 
  router.post("/login", authentication.loginMiddleware, (req, res) => {
@@ -55,7 +54,7 @@ const jwtOptions = {
 
 var curriculum2_section = require('./curriculum2_section');
 
-router.get('/curriculum2_section',(req,res)=> {
+router.get('/curriculum2_section',requireJWTAuth,(req,res)=> {
     curriculum2_section.READ(function(callback){
     res.json(callback);
     });
@@ -83,19 +82,19 @@ router.get('/curriculum2_section',(req,res)=> {
 // })
 
 //V4 use Request Body in POST , PUT , PATCH (Normalize HTTP Methods)
-router.post('/curriculum2_section/', (req,res)=> {
+router.post('/curriculum2_section/',requireJWTAuth, (req,res)=> {
     curriculum2_section.CREATE(req.body.curr2_section,req.body.curr2_id,req.body.curr2_section_student_amount, (err, data) => {
       res.send(data);
    });
   });
 
-router.put('/curriculum2_section/', (req,res)=> {
+router.put('/curriculum2_section/',requireJWTAuth, (req,res)=> {
     curriculum2_section.UPDATE(req.body.curr2_section,req.body.curr2_id,req.body.curr2_section_student_amount, (err, data) => {
         res.send(data);
      });
 })
 
-router.delete('/curriculum2_section/',(req,res)=> {
+router.delete('/curriculum2_section/',requireJWTAuth,(req,res)=> {
     curriculum2_section.DELETE(req.body.curr2_section, (err, data) => {
         res.send(data);
      });
@@ -105,13 +104,13 @@ router.delete('/curriculum2_section/',(req,res)=> {
 
 var curriculum2_subject = require('./curriculum2_subject');
 
-router.get('/curriculum2_subject',(req,res)=> {
+router.get('/curriculum2_subject',requireJWTAuth,(req,res)=> {
     curriculum2_subject.READ(function(callback){
     res.json(callback);
     });
 })
 
-router.post('/curriculum2_subject/',(req,res)=> {
+router.post('/curriculum2_subject/',requireJWTAuth,(req,res)=> {
     curriculum2_subject.CREATE(req.body.curr2_id,req.body.subject_id,req.body.semester, (err, data) => {
         res.send(data);
      });
@@ -124,7 +123,7 @@ router.post('/curriculum2_subject/',(req,res)=> {
 //      });
 // })
 
-router.delete('/curriculum2_subject/',(req,res)=> {
+router.delete('/curriculum2_subject/',requireJWTAuth,(req,res)=> {
     curriculum2_subject.DELETE(req.body.curr2_id,req.body.subject_id,req.body.semester, (err, data) => {
         res.send(data);
      });
@@ -134,25 +133,25 @@ router.delete('/curriculum2_subject/',(req,res)=> {
 
 var subject_section = require('./subject_section');
 
-router.get('/subject_section',(req,res)=> {
+router.get('/subject_section',requireJWTAuth,(req,res)=> {
     subject_section.READ(function(callback){
     res.json(callback);
     });
 })
 
-router.post('/subject_section/',(req,res)=> {
+router.post('/subject_section/',requireJWTAuth,(req,res)=> {
     subject_section.CREATE(req.body.subject_id,req.body.subject_section,req.body.teach_hr,req.body.subject_section_student_amount,req.body.teach_day,req.body.teach_time,req.body.teach_time2,req.body.lect_or_prac,req.body.break_time, (err, data) => {
         res.send(data);
     });
 })
 
-router.put('/subject_section/',(req,res)=> {
+router.put('/subject_section/',requireJWTAuth,(req,res)=> {
     subject_section.UPDATE(req.body.subject_id,req.body.subject_section,req.body.teach_hr,req.body.subject_section_student_amount,req.body.teach_day,req.body.teach_time,req.body.teach_time2,req.body.lect_or_prac,req.body.break_time, (err, data) => {
         res.send(data);
     });
 })
 
-router.delete('/subject_section/',(req,res)=> {
+router.delete('/subject_section/',requireJWTAuth,(req,res)=> {
     subject_section.DELETE(req.body.subject_id,req.body.subject_section, (err, data) => {
         res.send(data);
      });
@@ -162,7 +161,7 @@ router.delete('/subject_section/',(req,res)=> {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////teach_table
 var teach_table = require('./teach_table');
 
-router.get('/teach_table',(req,res)=> {
+router.get('/teach_table',requireJWTAuth,(req,res)=> {
     teach_table.READ(function(callback){
     res.json(callback);
     });
@@ -171,25 +170,26 @@ router.get('/teach_table',(req,res)=> {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////curriculum2
 var curriculum2 = require('./curriculum2');
 
-router.get('/curriculum2',(req,res)=> {
+router.get('/curriculum2',requireJWTAuth,(req,res)=> {
     curriculum2.READ(function(callback){
     res.json(callback);
     });
 })
 
-router.post('/curriculum2/', (req,res)=> {
+router.post('/curriculum2/',requireJWTAuth, (req,res)=> {
     curriculum2.CREATE(req.body.curr2_id,req.body.dept_id,req.body.curr2_tname,req.body.curr2_ename, (err, data) => {
       res.send(data);
    });
   });
 
-router.put('/curriculum2/', (req,res)=> {
+router.put('/curriculum2/',requireJWTAuth, (req,res)=> {
+    console.log(req.body.curr2_id)
     curriculum2.UPDATE(req.body.curr2_id,req.body.dept_id,req.body.curr2_tname,req.body.curr2_ename, (err, data) => {
         res.send(data);
      });
 })
 
-router.delete('/curriculum2/',(req,res)=> {
+router.delete('/curriculum2/',requireJWTAuth,(req,res)=> {
     curriculum2.DELETE(req.body.curr2_id, (err, data) => {
         res.send(data);
      });
@@ -199,7 +199,7 @@ router.delete('/curriculum2/',(req,res)=> {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////subject
 var subject = require('./subject');
 
-router.get('/subject',(req,res)=> {
+router.get('/subject',requireJWTAuth,(req,res)=> {
     subject.READ(function(callback){
     res.json(callback);
     });
