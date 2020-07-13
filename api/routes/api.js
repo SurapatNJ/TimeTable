@@ -26,6 +26,7 @@ router.get('/', swaggerUi.setup(swaggerDocument,options));
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////authentication
 const SECRET = "surapatnj";
+const exp_time = 1;
 var authentication = require('./authentication.js');
 const jwtOptions = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
@@ -44,7 +45,8 @@ const jwtOptions = {
  router.post("/login", authentication.loginMiddleware, (req, res) => {
     const payload = {
        sub: req.body.username,
-       iat: new Date().getTime()
+       iat: Math.round(Date.now() / 1000), 
+       exp: Math.round(Date.now() / 1000 + exp_time * 60 * 60)
     };
     res.send(jwt.encode(payload, SECRET));
  })
