@@ -43,7 +43,7 @@ module.exports.READ = function (callback) {
 
   
   module.exports.UPDATE = function UPDATE(subject_id,subject_section,teach_hr,subject_section_student_amount,teach_day,teach_time,teach_time2,lect_or_prac,break_time,cb){
-    var sqlString = `UPDATE subject_section SET teach_hr=${teach_hr}, subject_section_student_amount=${subject_section_student_amount},teach_day='${teach_day}',teach_time='${teach_time}',teach_time2='${teach_time2}',lect_or_prac='${lect_or_prac}',break_time=${break_time} WHERE subject_id='${subject_id}' AND subject_section=${subject_section}` 
+    var sqlString = `UPDATE subject_section SET teach_hr="${teach_hr}", subject_section_student_amount=${subject_section_student_amount},teach_day='${teach_day}',teach_time='${teach_time}',teach_time2='${teach_time2}',lect_or_prac='${lect_or_prac}',break_time=${break_time} WHERE subject_id='${subject_id}' AND subject_section=${subject_section}` 
     pool.getConnection((err, conn) => {
         if(err) throw err 
         pool.query(sqlString, function (err, rows) {
