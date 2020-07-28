@@ -169,6 +169,24 @@ router.get('/teach_table',requireJWTAuth,(req,res)=> {
     });
 })
 
+router.post('/teach_table/',requireJWTAuth, (req,res)=> {
+    teach_table.CREATE(req.body.subject_id,req.body.subject_section,req.body.curr2_section,req.body.teach_time,req.body.semester,req.body.year,req.body.curr2_id,req.body.teach_day,req.body.teach_time2,req.body.lect_or_prac,req.body.break_time, (err, data) => {
+      res.send(data);
+   });
+  });
+
+router.put('/teach_table/',requireJWTAuth, (req,res)=> {
+    teach_table.UPDATE(req.body.subject_id,req.body.subject_section,req.body.curr2_section,req.body.teach_time,req.body.semester,req.body.year,req.body.curr2_id,req.body.teach_day,req.body.teach_time2,req.body.lect_or_prac,req.body.break_time, (err, data) => {
+        res.send(data);
+     });
+})
+
+router.delete('/teach_table/',requireJWTAuth,(req,res)=> {
+    teach_table.DELETE(req.body.subject_id,req.body.subject_section,req.body.curr2_section,req.body.teach_time,req.body.semester,req.body.year, (err, data) => {
+        res.send(data);
+     });
+})
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////curriculum2
 var curriculum2 = require('./curriculum2');
 
@@ -185,7 +203,6 @@ router.post('/curriculum2/',requireJWTAuth, (req,res)=> {
   });
 
 router.put('/curriculum2/',requireJWTAuth, (req,res)=> {
-    console.log(req.body.curr2_id)
     curriculum2.UPDATE(req.body.curr2_id,req.body.dept_id,req.body.curr2_tname,req.body.curr2_ename, (err, data) => {
         res.send(data);
      });

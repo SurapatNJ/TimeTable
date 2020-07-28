@@ -12,7 +12,7 @@
     "paths" : {
     "/API/login" : {
       "post" : {
-        "tags":["authentication"],
+        "tags":["Authentication"],
         "consumes" : [ "application/json" ],
         "produces" : [ "text/html" ],
         "parameters" : [ {
@@ -38,12 +38,12 @@
     },
         "/API/{table_name}" : {
                 "get" : {
-                    "tags":["call table"],
+                    "tags":["CALL"],
                 "produces" : [ "application/json" ],
                 "parameters" : [ { 
                     "name" : "table_name",
                     "in" : "path",
-                    "description" : "List : \nsubject_section\ncurriculum2_subject\ncurriculum2_section\nteach_table\ncurriculum2\nsubject",
+                    "description" : "List : \nsubject_section\ncurriculum2_subject\ncurriculum2_section\nteach_table\ncurriculum2\nsubject\nteach_table",
                     "required" : true,
                     "type" : "string"
                 } ],
@@ -328,8 +328,86 @@
               }
             }
           }
+        },
+        "/API/teach_table/" : {
+          "post" : {
+            "tags":["teach_table"],
+            "consumes" : [ "application/json" ],
+            "parameters" : [ {
+              "in" : "body",
+              "name" : "body",
+              "required" : false,
+              "schema" : {
+                "$ref" : "#/definitions/Model16"
+              },
+              "x-examples" : {
+                "application/json" : "{\n    \"subject_id\":\"01006012\",  \n    \"subject_section\":\"5\",\n    \"curr2_section\":\"1\",\n    \"teach_time\":\"08:00:00\",\n    \"semester\":\"1\",\n    \"year\":\"2020\",\n    \"curr2_id\":\"02\",\n    \"teach_day\":\"mon\",\n    \"teach_time2\":\"10:00:00\",\n    \"lect_or_prac\":\"l\",\n    \"break_time\":\"null\"\n   }"
+              }
+            } ],
+            "responses" : {
+              "default" : {
+                "description" : "Definition generated from Swagger Inspector"
+              }
+            },
+            "security" : [ {
+              "Secured" : [ ]
+            } ]
+          },
+          "put" : {
+            "tags":["teach_table"],
+            "consumes" : [ "application/json" ],
+            "produces" : [ "text/html" ],
+            "parameters" : [ {
+              "in" : "body",
+              "name" : "body",
+              "required" : false,
+              "schema" : {
+                "$ref" : "#/definitions/Model17"
+              },
+              "x-examples" : {
+                "application/json" : "{\n    \"subject_id\":\"01006012\",  \n    \"subject_section\":\"5\",\n    \"curr2_section\":\"1\",\n    \"teach_time\":\"'08:00:00'\",\n    \"semester\":\"1\",\n    \"year\":\"2020\",\n    \"curr2_id\":\"02\",\n    \"teach_day\":\"'mon'\",\n    \"teach_time2\":\"'10:00:00'\",\n    \"lect_or_prac\":\"'p'\",\n    \"break_time\":\"null\"\n   }"
+              }
+            } ],
+            "responses" : {
+              "200" : {
+                "description" : "Definition generated from Swagger Inspector",
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "security" : [ {
+              "Secured" : [ ]
+            } ]
+          },
+          "delete" : {
+            "tags":["teach_table"],
+            "consumes" : [ "application/json" ],
+            "produces" : [ "text/html" ],
+            "parameters" : [ {
+              "in" : "body",
+              "name" : "body",
+              "required" : false,
+              "schema" : {
+                "$ref" : "#/definitions/Model18"
+              },
+              "x-examples" : {
+                "application/json" : "{\n    \"subject_id\":\"01006012\",  \n    \"subject_section\":\"5\",\n    \"curr2_section\":\"1\",\n    \"teach_time\":\"'08:00:00'\",\n    \"semester\":\"1\",\n    \"year\":\"2020\"\n   }"
+              }
+            } ],
+            "responses" : {
+              "200" : {
+                "description" : "Definition generated from Swagger Inspector",
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "security" : [ {
+              "Secured" : [ ]
+            } ]
+          }
         }
-      
     },
     "definitions" : {
       "Model0" : {
@@ -559,6 +637,102 @@
             "type" : "string"
           },
           "password" : {
+            "type" : "string"
+          }
+        }
+      },    
+      "Model16" : {
+        "properties" : {
+          "subject_id" : {
+            "type" : "string"
+          },
+          "subject_section" : {
+            "type" : "string"
+          },
+          "curr2_section" : {
+            "type" : "string"
+          },
+          "teach_time" : {
+            "type" : "string"
+          },
+          "semester" : {
+            "type" : "string"
+          },
+          "year" : {
+            "type" : "string"
+          },
+          "curr2_id" : {
+            "type" : "string"
+          },
+          "teach_day" : {
+            "type" : "string"
+          },
+          "teach_time2" : {
+            "type" : "string"
+          },
+          "lect_or_prac" : {
+            "type" : "string"
+          },
+          "break_time" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Model17" : {
+        "properties" : {
+          "subject_id" : {
+            "type" : "string"
+          },
+          "subject_section" : {
+            "type" : "string"
+          },
+          "curr2_section" : {
+            "type" : "string"
+          },
+          "teach_time" : {
+            "type" : "string"
+          },
+          "semester" : {
+            "type" : "string"
+          },
+          "year" : {
+            "type" : "string"
+          },
+          "curr2_id" : {
+            "type" : "string"
+          },
+          "teach_day" : {
+            "type" : "string"
+          },
+          "teach_time2" : {
+            "type" : "string"
+          },
+          "lect_or_prac" : {
+            "type" : "string"
+          },
+          "break_time" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Model18" : {
+        "properties" : {
+          "subject_id" : {
+            "type" : "string"
+          },
+          "subject_section" : {
+            "type" : "string"
+          },
+          "curr2_section" : {
+            "type" : "string"
+          },
+          "teach_time" : {
+            "type" : "string"
+          },
+          "semester" : {
+            "type" : "string"
+          },
+          "year" : {
             "type" : "string"
           }
         }

@@ -2,7 +2,7 @@ const mysql = require('mysql');
 const pool = mysql.createPool({
         connectionLimit: 10,
         host: "2.tcp.ngrok.io",
-        port: "12949",
+        port: "11577",
         user: "root",
         password: "",
         database: "teachtable"
