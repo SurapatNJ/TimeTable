@@ -62,28 +62,6 @@ router.get('/curriculum2_section',requireJWTAuth,(req,res)=> {
     });
 })
 
-//V1  Know Nothing
-// router.get('/curriculum2',(req,res)=> {
-//     let sql = 'SELECT * FROM curriculum2'  
-//     let query = db.query(sql,(err,results) => { 
-//         if(err) throw err 
-//         console.log(results) 
-//         res.json(results)   
-//     })
-// })
-
-//V2 Call function from another .js (Clean Code)
-// router.get('/curriculum2_section/add',(req,res)=> {
-//     const {curr2_id,curr2_section,curr2_section_student_amount} =req.query;
-//     curriculum2_section.add(curr2_id,curr2_section,curr2_section_student_amount)
-// })
-
-//V3 Use http method other than get (Normalize HTTP Methods)
-// router.post('/curriculum2_section/:curr2_section/:curr2_id/:curr2_section_student_amount',(req,res)=> {
-//     curriculum2_section.READ(req.params.curr2_id,req.params.curr2_section,req.params.curr2_section_student_amount)
-// })
-
-//V4 use Request Body in POST , PUT , PATCH (Normalize HTTP Methods)
 router.post('/curriculum2_section/',requireJWTAuth, (req,res)=> {
     curriculum2_section.CREATE(req.body.curr2_section,req.body.curr2_id,req.body.curr2_section_student_amount, (err, data) => {
       res.send(data);
@@ -118,12 +96,6 @@ router.post('/curriculum2_subject/',requireJWTAuth,(req,res)=> {
      });
 })
 
-// //CANT UPDATE bc same primary key
-// router.post('/curriculum2_subject/',(req,res)=> {
-//     curriculum2_subject.UPDATE(req.body.curr2_id,req.body.subject_id,req.body.semester, (err, data) => {
-//         res.send(data);
-//      });
-// })
 
 router.delete('/curriculum2_subject/',requireJWTAuth,(req,res)=> {
     curriculum2_subject.DELETE(req.body.curr2_id,req.body.subject_id,req.body.semester, (err, data) => {
@@ -182,7 +154,7 @@ router.put('/teach_table/',requireJWTAuth, (req,res)=> {
 })
 
 router.delete('/teach_table/',requireJWTAuth,(req,res)=> {
-    teach_table.DELETE(req.body.subject_id,req.body.subject_section,req.body.curr2_section,req.body.teach_time,req.body.semester,req.body.year, (err, data) => {
+    teach_table.DELETE(req.body.semester,req.body.year, (err, data) => {
         res.send(data);
      });
 })

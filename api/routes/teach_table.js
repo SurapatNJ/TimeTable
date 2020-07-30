@@ -27,16 +27,16 @@ module.exports.READ = function (callback) {
     })
   }
 
-  module.exports.DELETE = function DELETE(subject_id,subject_section,curr2_section,teach_time,semester,year,cb) {
-    var sqlString = `DELETE from teach_table WHERE subject_id='${subject_id}' AND subject_section=${subject_section} AND curr2_section=${curr2_section} AND teach_time=${teach_time} AND semester=${semester} AND year=${year}` 
+  module.exports.DELETE = function DELETE(semester,year,cb) {
+    var sqlString = `DELETE from teach_table WHERE semester=${semester} AND year=${year}` 
     pool.getConnection((err, conn) => {
         if(err) throw err 
         pool.query(sqlString, function (err, rows) {
             console.log('Query String:\n '+this.sql);
             if(err) throw err 
-            console.log('Data Delete: '+subject_id+','+subject_section+','+curr2_section+','+teach_time+','+semester+','+year)
+            console.log('Data Delete: '+semester+','+year)
             conn.release();
-            cb(null,'Data Delete: '+subject_id+','+subject_section+','+curr2_section+','+teach_time+','+semester+','+year)
+            cb(null,'Data Delete: '+semester+','+year)
         })
       })
   }
