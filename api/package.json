@@ -18,7 +18,7 @@
     "mysql": "^2.18.1",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
-    "pm2": "^4.4.0",
+    "pm2": "^5.2.0",
     "pug": "^3.0.0",
     "swagger-ui": "^3.27.0",
     "swagger-ui-express": "^4.1.4",
